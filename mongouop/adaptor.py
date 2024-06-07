@@ -200,6 +200,10 @@ class MongoUOP(database.Database):
         raw = self.get_raw_collection(name)
         return MongoCollection(raw, tenant_modifier=tenant_modifier)
 
+    def get_standard_collection(self, kind, tenant_modifier=None):
+        coll_name = database.collection_names[kind]
+        return self.get_managed_collection(coll_name, tenant_modifier)
+
     def _db_has_collection(self, name):
         return name in self._db.list_collection_names()
 
